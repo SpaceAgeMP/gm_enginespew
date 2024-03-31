@@ -118,9 +118,10 @@ jobs:
       - name: Build
         run: |
           set -ex
+          cp '.github/build.sh' "${BUILD_SCRIPT}"
           sudo apt-get -y install gcc-multilib g++-multilib
           curl -f -s -L "$BOOTSTRAP_URL" | bash -x
-          $BUILD_SCRIPT './dependencies/garrysmod_common/build'
+          $BUILD_SCRIPT
       - name: Upload release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
