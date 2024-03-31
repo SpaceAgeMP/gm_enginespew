@@ -37,6 +37,7 @@ jobs:
       - name: Build
         run: |
           Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("$env:BOOTSTRAP_URL"))
+          Copy-Item '.github/build.ps1' "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
         uses: softprops/action-gh-release@v1
@@ -63,6 +64,7 @@ jobs:
       - name: Build
         run: |
           Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("$env:BOOTSTRAP_URL"))
+          Copy-Item '.github/build.ps1' "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
         uses: softprops/action-gh-release@v1
@@ -89,9 +91,9 @@ jobs:
       - name: Build
         run: |
           set -ex
-          cp '.github/build.sh' "${BUILD_SCRIPT}"
           sudo apt-get -y install gcc-multilib g++-multilib
           curl -f -s -L "$BOOTSTRAP_URL" | bash -x
+          cp '.github/build.sh' "${BUILD_SCRIPT}"
           $BUILD_SCRIPT
       - name: Upload release
         uses: softprops/action-gh-release@v1
@@ -118,9 +120,9 @@ jobs:
       - name: Build
         run: |
           set -ex
-          cp '.github/build.sh' "${BUILD_SCRIPT}"
           sudo apt-get -y install gcc-multilib g++-multilib
           curl -f -s -L "$BOOTSTRAP_URL" | bash -x
+          cp '.github/build.sh' "${BUILD_SCRIPT}"
           $BUILD_SCRIPT
       - name: Upload release
         uses: softprops/action-gh-release@v1
