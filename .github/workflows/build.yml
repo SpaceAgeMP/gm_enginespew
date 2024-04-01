@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
         id: create_release
 
@@ -40,7 +40,7 @@ jobs:
           Copy-Item '.github/build.ps1' "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
@@ -67,7 +67,7 @@ jobs:
           Copy-Item '.github/build.ps1' "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
@@ -96,7 +96,7 @@ jobs:
           cp '.github/build.sh' "${BUILD_SCRIPT}"
           $BUILD_SCRIPT
       - name: Upload release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
@@ -125,7 +125,7 @@ jobs:
           cp '.github/build.sh' "${BUILD_SCRIPT}"
           $BUILD_SCRIPT
       - name: Upload release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
@@ -154,7 +154,7 @@ jobs:
           cd projects/macosx/gmake
           gmake config=release_x86_64
       - name: Upload release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
