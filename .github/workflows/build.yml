@@ -29,7 +29,7 @@ jobs:
       BUILD_SCRIPT: ./dependencies/garrysmod_common/build/build.ps1
       COMPILER_PLATFORM: vs2022
       PROJECT_OS: windows
-      BUILD_ARCH: '64'
+      DISABLE_32BIT: 'true'
       PREMAKE5: ./dependencies/windows/premake-core/premake5.exe
       PREMAKE5_URL: https://github.com/danielga/garrysmod_common/releases/download/premake-build%2F5.0.0-beta2/premake-5.0.0-beta2-windows.zip
     steps:
@@ -37,7 +37,6 @@ jobs:
       - name: Build
         run: |
           Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("$env:BOOTSTRAP_URL"))
-          Copy-Item '.github/build.ps1' "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
         uses: softprops/action-gh-release@v2
@@ -56,7 +55,7 @@ jobs:
       BUILD_SCRIPT: ./dependencies/garrysmod_common/build/build.ps1
       COMPILER_PLATFORM: vs2022
       PROJECT_OS: windows
-      BUILD_ARCH: '32'
+      DISABLE_64BIT: 'true'
       PREMAKE5: ./dependencies/windows/premake-core/premake5.exe
       PREMAKE5_URL: https://github.com/danielga/garrysmod_common/releases/download/premake-build%2F5.0.0-beta2/premake-5.0.0-beta2-windows.zip
     steps:
@@ -64,7 +63,6 @@ jobs:
       - name: Build
         run: |
           Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("$env:BOOTSTRAP_URL"))
-          Copy-Item '.github/build.ps1' "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
         uses: softprops/action-gh-release@v2
@@ -84,7 +82,7 @@ jobs:
       COMPILER_PLATFORM: gmake
       PREMAKE5: ./dependencies/linux/premake-core/premake5
       PROJECT_OS: linux
-      BUILD_ARCH: '64'
+      DISABLE_32BIT: 'true'
       PREMAKE5_URL: https://github.com/danielga/garrysmod_common/releases/download/premake-build%2F5.0.0-beta2/premake-5.0.0-beta2-linux.tar.gz
     steps:
       - uses: actions/checkout@v4
@@ -93,7 +91,6 @@ jobs:
           set -ex
           sudo apt-get -y install gcc-multilib g++-multilib
           curl -f -s -L "$BOOTSTRAP_URL" | bash -x
-          cp '.github/build.sh' "${BUILD_SCRIPT}"
           $BUILD_SCRIPT
       - name: Upload release
         uses: softprops/action-gh-release@v2
@@ -113,7 +110,7 @@ jobs:
       COMPILER_PLATFORM: gmake
       PREMAKE5: ./dependencies/linux/premake-core/premake5
       PROJECT_OS: linux
-      BUILD_ARCH: '32'
+      DISABLE_64BIT: 'true'
       PREMAKE5_URL: https://github.com/danielga/garrysmod_common/releases/download/premake-build%2F5.0.0-beta2/premake-5.0.0-beta2-linux.tar.gz
     steps:
       - uses: actions/checkout@v4
@@ -122,7 +119,6 @@ jobs:
           set -ex
           sudo apt-get -y install gcc-multilib g++-multilib
           curl -f -s -L "$BOOTSTRAP_URL" | bash -x
-          cp '.github/build.sh' "${BUILD_SCRIPT}"
           $BUILD_SCRIPT
       - name: Upload release
         uses: softprops/action-gh-release@v2
@@ -140,7 +136,7 @@ jobs:
       - name: Build
         env:
           GARRYSMOD_COMMON_BRANCH: x86-64-support-sourcesdk
-          BUILD_ARCH: '64'
+          DISABLE_32BIT: 'true'
           AR: ar
         run: |
           set -ex
