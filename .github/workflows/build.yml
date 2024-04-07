@@ -36,7 +36,6 @@ jobs:
       - name: Build
         run: |
           Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("$env:BOOTSTRAP_URL"))
-          Copy-Item -Force -Path ".github/build.ps1" -Destination "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
         uses: softprops/action-gh-release@v2
@@ -63,7 +62,6 @@ jobs:
       - name: Build
         run: |
           Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("$env:BOOTSTRAP_URL"))
-          Copy-Item -Force -Path ".github/build.ps1" -Destination "$env:BUILD_SCRIPT"
           & "$env:BUILD_SCRIPT"
       - name: Upload release
         uses: softprops/action-gh-release@v2
